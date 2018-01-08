@@ -1,8 +1,4 @@
 package olg.gcp.listable.endpoint;
-import java.io.IOException;
-
-import java.io.OutputStream;
-import java.nio.charset.Charset;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
@@ -11,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 
 @RestController
 public class HomeController {

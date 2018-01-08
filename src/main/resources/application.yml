@@ -1,23 +1,9 @@
 spring:
   application:
-    name: listable-repo
+    name: listable-storage
 
-  jpa:
-    properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
-    properties.hibernate.hbm2ddl.auto: create
 
-  data:
-    rest:
-      base-path: /api
 
-  cloud:
-    gcp:
-      sql:
-        database-name: listable
-        instance-connection-name: listable-189821:us-east1:listable-repo-1
-        username: root
-
-database: mysql
 
 management:
   security:
