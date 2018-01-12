@@ -2,15 +2,12 @@ spring:
   application:
     name: listable-storage
 
-storage:
-  bucket-name: listable-bucket
 
 services:
-  repo: https://whatever.appspot.com/api
+  repo: http://localhost:9001/api
 
 management:
   security:
     enabled: false
 
 debug: false
-

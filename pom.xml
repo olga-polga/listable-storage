@@ -26,6 +26,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<appengine.maven.plugin>1.3.2</appengine.maven.plugin>
 	   <failOnMissingWebXml>false</failOnMissingWebXml>
+	   <storage.bucket-name>listable-bucket</storage.bucket-name>
 	</properties>
 
     <repositories>
@@ -98,6 +99,17 @@
 
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<storage.bucket-name>listable-bucket</storage.bucket-name>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
