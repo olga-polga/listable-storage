@@ -96,5 +96,8 @@ public class CloudStorageHelper {
     return imageUrl;
   }
   // [END getImageUrl]
+  public static String appendToFilename(final String filename, final String append) {
+    return filename.replaceAll("(.s{3,4})$", append + "$1");
+  }
 }
 // [END example]

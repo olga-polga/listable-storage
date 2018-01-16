@@ -6,7 +6,7 @@ storage:
   bucket-name: listable-bucket
 
 services:
-  repo: https://whatever.appspot.com/api
+  repo: https://listable-repo.appspot.com/api
 
 management:
   security:

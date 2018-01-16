@@ -1,6 +1,8 @@
 package olg.gcp.listable.endpoint;
 
+import olg.gcp.listable.util.StorageService;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.URI;
 
 @RestController
@@ -23,29 +26,32 @@ public class HomeController {
     private static final String linkResourceUrlTemplate = "%s/houses/%s/pictures";
     private static final String postResourceUrlTemplate = "%s/pictures";
 
-
-//    @Value("gs://listable-bucket/my-file.txt")
-//    private Resource gcsFile;
-//    @GetMapping("/")
-//    public String readGcsFile()  throws IOException {
-//                return StreamUtils.copyToString(
-//                gcsFile.getInputStream(),
-//                Charset.defaultCharset()) + "\n";
-//    }
+    @Autowired
+    public StorageService storageService;
 
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    @RequestParam("listingId") String listingId) {
+
+        System.out.println(storageService.testMe());
+        String storageUrl = null;
+        try {
+            storageUrl = storageService.saveFile(file);
+            System.out.println(storageUrl);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return e.toString();
+        }
+
         RestTemplate restTemplate = new RestTemplate();
 
         // Add new image url to the data repository:
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set("Content-Type", "application/json");
         JSONObject json = new JSONObject();
-        //@TODO:  storageService.store(file);
-        json.put("url", file.getOriginalFilename());
+        json.put("url", storageUrl);
         HttpEntity<String> httpEntity = new HttpEntity<>(json.toString(), httpHeaders);
         String postPicUrl = String.format(postResourceUrlTemplate, listableRepoUrl);
         URI location = restTemplate.postForLocation(postPicUrl, httpEntity);
@@ -63,12 +69,9 @@ public class HomeController {
     }
 
 
-//    @RequestMapping(value = "/", method = RequestMethod.POST)
-//    String writeGcs(@RequestBody String data) throws IOException {
-//        try (OutputStream os = ((WritableResource) gcsFile).getOutputStream()) {
-//            os.write(data.getBytes());
-//        }
-//        return "file was updated\n";
-//    }
+    @GetMapping("/")
+    public String test()  throws IOException {
+                return storageService.testMe();
+    }
 
 }
