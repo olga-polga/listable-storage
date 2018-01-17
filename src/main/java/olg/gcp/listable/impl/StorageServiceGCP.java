@@ -55,7 +55,7 @@ public class StorageServiceGCP implements StorageService {
         // Create a fixed dedicated URL that points to the GCS hosted file
         ServingUrlOptions options = ServingUrlOptions.Builder
                 .withGoogleStorageFileName("/gs/" + bucketName + "/" + fileName)
-                .imageSize(150)
+                .imageSize(200)
                 .crop(true)
                 .secureUrl(true);
         ImagesService imagesService = ImagesServiceFactory.getImagesService();
