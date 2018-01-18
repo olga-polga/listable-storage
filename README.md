@@ -1,15 +1,16 @@
 # listable-storage
-Using Google Cloud Storage
+Using Google Cloud Storage for storing images
 
 ## Run with dev server:  
 ```
-mvn appengine:run -DskipTests=true
+mvn appengine:run
 ```
 ## Deploy to GCP:
 ```
-mvn appengine:deploy -DskipTests=true
+mvn appengine:deploy
 ```
 ## Issues:
-- unable to run tests locally
+- must use war format in local dev server
+- must exclude android-json from the spring-boot-starter-test
 - unable to use blobstore locally outside dev server - confirmed
-- unable to get blobkey locally in order to use com.google.appengine.api.images.ImagesService
+- @TODO: unable to get blobkey locally in order to use com.google.appengine.api.images.ImagesService

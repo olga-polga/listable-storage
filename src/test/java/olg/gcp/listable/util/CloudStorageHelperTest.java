@@ -7,9 +7,13 @@ import static org.junit.Assert.*;
 public class CloudStorageHelperTest {
 
     @Test
-    public void appendToFilename() {
-        String original = "dhaskdjfkj.jpg";
-        String edited = CloudStorageHelper.appendToFilename(original, "abcd");
-         System.out.print(edited);
+    public void getOriginalImageUrl() {
+        String original = "https://lh3.googlecontent.com/DaNXfYX_zs4LxVu2Z7oYHMzelDTbnMTX=s200-c";
+        String edited = original.replaceAll("(.*)=.*", "$1");
+        assertEquals("https://lh3.googlecontent.com/DaNXfYX_zs4LxVu2Z7oYHMzelDTbnMTX", edited);
+
+        original = "https://lh3=googlecontent.com/DaNXfYX_zs4LxVu2Z7oYHMzelDTbnMTX=s200-c";
+        edited = original.replaceAll("(.*)=.*", "$1");
+        assertEquals("https://lh3=googlecontent.com/DaNXfYX_zs4LxVu2Z7oYHMzelDTbnMTX", edited);
     }
 }
